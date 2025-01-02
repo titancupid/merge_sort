@@ -8,7 +8,7 @@ then you combine adjacent arrays into bigger arrays and sort them
 you continue this process until the array is properly sorted*/
 
 void test_rec(int &i);
-void test_arr(int arr, int arr1[], int arr2[]);
+void test_arr(int size1, int size2, int arr1[], int arr2[]);
 int merge_func(int arr[], int &size);
 
 int main()
@@ -29,37 +29,45 @@ int merge_func(int arr[], int &size)
         of the arrays
       3) sort these sub arrays then repeat step two until the
         array is fully sorted*/
-    if (size % 2 == 1)
-        size += 1;
 
-    size /= 2;
-    cout << "\nsize: " << size << endl;
+    int size1, size2;
+    int n1 = 0, n2 = 0;
 
-    int *arr1 = new int[size];
-    for (int i = 0; i < size; i++)
+    if (size % 2 == 1){
+        size1 = size / 2;
+        size2 = (size / 2) - 1;
+    }
+    else{
+        size1 = size / 2;
+        size2 = size / 2;
+    }
+
+    cout << "\nsize1: " << size1 << endl;
+    cout << "\nsize2: " << size2 << endl;
+
+    int *arr1 = new int[size1];
+    for (int i = 0; i < size1; i++)
     {
         arr1[i] = arr[i];
     }
 
-    int *arr2 = new int[size];
-    for (int i = 0; i < size; i++)
+    int *arr2 = new int[size2];
+    for (int i = 0; i < size2; i++)
     {
-        arr2[i] = arr[size + i];
+        arr2[i] = arr[size1 + i];
     }
 
     // test arrays to see if populated
-    test_arr(size, arr1, arr2);
+    test_arr(size1, size2, arr1, arr2);
 
-    if (size != 1)
-    {
-        //cout << "\nmakes here1: " << endl;
-        merge_func(arr1, size);
-    }
-    if (size != 1)
-    {
-        //cout << "\nmakes here2: " << endl;
-        merge_func(arr2, size);
-    }
+    if (size1 != 1)
+        merge_func(arr1, size1);
+
+    if (size2 != 1)
+        merge_func(arr2, size2);
+
+    // add returns and the call of merge process
+
 }
 
 void test_rec(int &i)
@@ -74,9 +82,9 @@ void test_rec(int &i)
     test_rec(i);
 }
 
-void test_arr(int half_size, int arr1[], int arr2[]){
+void test_arr(int size1, int size2, int arr1[], int arr2[]){
     // test arrays to see if populated
-    for (int i = 0; i < half_size; i++)
+    for (int i = 0; i < size1; i++)
     {
         cout << arr1[i] << ", ";
     }
@@ -85,11 +93,10 @@ void test_arr(int half_size, int arr1[], int arr2[]){
     cout << endl;
     cout << endl;
 
-    for (int i = 0; i < half_size; i++)
+    for (int i = 0; i < size2; i++)
     {
         cout << arr2[i] << ", ";
     }
-    //delete arr2;
 
     return;
     ////////////////////////////////////
