@@ -42,9 +42,6 @@ int merge_func(int arr[], int &size)
         size2 = size / 2;
     }
 
-    cout << "\nsize1: " << size1 << endl;
-    cout << "\nsize2: " << size2 << endl;
-
     int *arr1 = new int[size1];
     for (int i = 0; i < size1; i++)
     {
@@ -62,12 +59,15 @@ int merge_func(int arr[], int &size)
 
     if (size1 != 1)
         merge_func(arr1, size1);
+    else
+        return arr1[0];
 
     if (size2 != 1)
         merge_func(arr2, size2);
+    else
+        return arr2[0];
 
     // add returns and the call of merge process
-
 }
 
 void test_rec(int &i)
@@ -84,15 +84,16 @@ void test_rec(int &i)
 
 void test_arr(int size1, int size2, int arr1[], int arr2[]){
     // test arrays to see if populated
+    
+    cout << "\nsize1: " << size1 << endl;
     for (int i = 0; i < size1; i++)
     {
         cout << arr1[i] << ", ";
     }
-    //delete arr1;
 
     cout << endl;
-    cout << endl;
 
+    cout << "\nsize2: " << size2 << endl;
     for (int i = 0; i < size2; i++)
     {
         cout << arr2[i] << ", ";
