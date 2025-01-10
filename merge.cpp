@@ -35,7 +35,7 @@ int merge_func(int arr[], int &size)
 
     if (size % 2 == 1){
         size1 = size / 2;
-        size2 = (size / 2) - 1;
+        size2 = (size / 2) + 1;
     }
     else{
         size1 = size / 2;
