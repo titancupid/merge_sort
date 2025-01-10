@@ -9,7 +9,9 @@ you continue this process until the array is properly sorted*/
 
 void test_rec(int &i);
 void test_arr(int size1, int size2, int arr1[], int arr2[]);
-int merge_func(int arr[], int &size);
+void test_merged(int merged[], int newsize);
+int split_func(int arr[], int &size);
+int* merge_func(int arr1[], int arr2[], int size1, int size2);
 
 int main()
 {
@@ -18,10 +20,10 @@ int main()
 
     int arr[] = {4, 18, 3, 94, 12, 8, 69, 14, 5, 1};
     int size = sizeof(arr)/sizeof(arr[0]);
-    merge_func(arr, size); 
+    split_func(arr, size); 
 }
 
-int merge_func(int arr[], int &size)
+int split_func(int arr[], int &size)
 {
     /*1) create two arrays of half the size and repeat until
         there is one eliment in each array that
@@ -31,7 +33,6 @@ int merge_func(int arr[], int &size)
         array is fully sorted*/
 
     int size1, size2;
-    int n1 = 0, n2 = 0;
 
     if (size % 2 == 1){
         size1 = size / 2;
@@ -42,8 +43,8 @@ int merge_func(int arr[], int &size)
         size2 = size / 2;
     }
 
-    cout << "\nsize1: " << size1 << endl;
-    cout << "\nsize2: " << size2 << endl;
+    //cout << "\nsize1: " << size1 << endl;
+    //cout << "\nsize2: " << size2 << endl;
 
     int *arr1 = new int[size1];
     for (int i = 0; i < size1; i++)
@@ -58,16 +59,42 @@ int merge_func(int arr[], int &size)
     }
 
     // test arrays to see if populated
-    test_arr(size1, size2, arr1, arr2);
+    //test_arr(size1, size2, arr1, arr2);
 
     if (size1 != 1)
-        merge_func(arr1, size1);
+        split_func(arr1, size1);
 
     if (size2 != 1)
-        merge_func(arr2, size2);
+        split_func(arr2, size2);
 
-    // add returns and the call of merge process
+    merge_func(arr1, arr2, size1, size2); // merge call
 
+}
+
+int* merge_func(int arr1[], int arr2[], int size1, int size2){
+    /*1) take the two arrays input and combine them to one array
+      2) sort these arrays then repeat until one input array is 
+        empty*/
+    
+    cout << size1 << " " << size2 << endl;
+    int newsize = size1 + size2;
+    int* merged = new int[newsize];
+
+    /*Need to fill the new merged array with the contents of both
+        arr1 and arr2*/
+    for(int i = 0; i < size1; i++){
+        merged[i] = arr1[i];
+    }
+        cout << endl;
+
+    for(int i = 0; i < size2; i++){
+        merged[i+size1] = arr2[i];
+    }
+    cout << endl;
+
+    test_merged(merged, newsize);
+
+    return merged;
 }
 
 void test_rec(int &i)
@@ -100,4 +127,11 @@ void test_arr(int size1, int size2, int arr1[], int arr2[]){
 
     return;
     ////////////////////////////////////
+}
+
+void test_merged(int merged[], int newsize){
+    for(int i = 0; i < newsize; i++)
+        cout << merged[i] << ", ";
+
+    cout << endl;
 }
