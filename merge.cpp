@@ -18,7 +18,7 @@ int main()
     // int num = 0;
     // test_rec(num);
 
-    int arr[] = {4, 18, 3, 94, 12, 8, 69, 14, 5, 1};
+    int arr[] = {4, 18, 3, 94, 12, 8, 69, 14, 5, 1, 72, 72, 1, 42, 420, 11, 21, 3, 9, 4, 12, 99, 98, 97, 100};
     int size = sizeof(arr)/sizeof(arr[0]);
     int* sorted = split_func(arr, size); 
 
@@ -156,7 +156,6 @@ void test_arr(int size1, int size2, int arr1[], int arr2[]){
     {
         cout << arr1[i] << ", ";
     }
-    //delete arr1;
 
     cout << endl;
     cout << endl;
@@ -165,9 +164,6 @@ void test_arr(int size1, int size2, int arr1[], int arr2[]){
     {
         cout << arr2[i] << ", ";
     }
-
-    return;
-    ////////////////////////////////////
 }
 
 void test_merged(int merged[], int newsize){
